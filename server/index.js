@@ -46,6 +46,28 @@ async function run() {
         const result = await todoCollection.insertOne(todo)
         res.send(result)
     })
+    // update todo
+    app.put('/todo/:id', async(req, res) =>{
+      const id = req.params.id;
+      const todo = req.body
+      const filter = {_id: new ObjectId(id)}
+      const options = {upsert: true}
+      const updateTodo = {
+        $set:{
+          todoName: todo.name
+        }
+      }
+      const result = await todoCollection.updateOne(filter, updateTodo, options)
+      res.send(result)
+
+    })
+    // delete a todo
+    app.delete('/todo/:id', async(req, res) =>{
+      const id  = req.params.id;
+      const query = {_id: new ObjectId(id)}
+      const result = await todoCollection.deleteOne(query)
+      res.send(result)
+    })
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
