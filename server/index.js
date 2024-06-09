@@ -43,6 +43,7 @@ async function run() {
     //  create a todo
     app.post('/todo', async(req,res)=>{
         const todo = req.body
+        console.log(todo);
         const result = await todoCollection.insertOne(todo)
         res.send(result)
     })
