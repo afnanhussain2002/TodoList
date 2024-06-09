@@ -1,7 +1,10 @@
 import { MdOutlineMenu, MdDelete } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
+import Swal from 'sweetalert2'
+import { useLoaderData } from "react-router-dom";
 
 function App() {
+  const loadTodos = useLoaderData()
 
   const handleAddTodo = e =>{
       e.preventDefault()
@@ -21,6 +24,17 @@ function App() {
       .then(res => res.json())
       .then(data => {
         console.log(data);
+        if(data.insertedId){
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            iconColor:'#AF7EEB',
+            title: "Your Todo has been Added",
+            showConfirmButton: false,
+            timer: 1500
+          });
+          form.reset()
+        }
       })
 
   }
@@ -33,10 +47,10 @@ function App() {
             <h3 className="text-white text-sm flex justify-between items-center px-5 lg:text-2xl"> <span className="px-2"><MdOutlineMenu/></span>Todo List App</h3>
           </div>
           <div className="bg-white shadow-xl mt-4 py-5 font-semibold grid justify-center text-gray-400 text-xs rounded-md lg:text-xl">
-            <p className="flex items-center gap-4">First Todo <span><FaRegEdit/></span><span><MdDelete/></span></p>
-            <p className="flex items-center gap-4">First Todo <span><FaRegEdit/></span><span><MdDelete/></span></p>
-            <p className="flex items-center gap-4">First Todo <span><FaRegEdit/></span><span><MdDelete/></span></p>
-            <p className="flex items-center gap-4">First Todo <span><FaRegEdit/></span><span><MdDelete/></span></p>
+            {
+              loadTodos.map(todo => <p key={todo._id} className="flex items-center gap-4">{todo.todo} <span><FaRegEdit/></span><span><MdDelete/></span></p>)
+            }
+            
           </div>
           <div className="bg-second-color mt-4 shadow-xl py-3 rounded-md">
             <form onSubmit={handleAddTodo} className="flex gap-2 justify-center px-3">

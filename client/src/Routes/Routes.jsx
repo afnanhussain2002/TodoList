@@ -4,7 +4,8 @@ import App from "../App";
 const router = createBrowserRouter([
     {
         path:'/',
-        element:<App/>
+        element:<App/>,
+        loader:() => fetch('http://localhost:5000/todo')
     }
 ])
 
