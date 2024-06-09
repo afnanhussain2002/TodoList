@@ -16,8 +16,11 @@ function App() {
             <p className="flex items-center gap-4">First Todo <span><FaRegEdit/></span><span><MdDelete/></span></p>
             <p className="flex items-center gap-4">First Todo <span><FaRegEdit/></span><span><MdDelete/></span></p>
           </div>
-          <div>
-            footer
+          <div className="bg-second-color mt-4 shadow-xl py-3">
+            <form className="flex gap-2 justify-center">
+            <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs bg-white text-center" />
+            <button className="btn bg-white border-none">Add</button>
+            </form>
           </div>
         </section>
    </main>
