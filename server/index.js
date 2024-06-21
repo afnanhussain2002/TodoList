@@ -55,7 +55,7 @@ async function run() {
       const options = {upsert: true}
       const updateTodo = {
         $set:{
-          todoName: todo.name
+          todo: todo.todo
         }
       }
       const result = await todoCollection.updateOne(filter, updateTodo, options)
